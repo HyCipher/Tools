@@ -2,7 +2,7 @@ import os
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
-
+# Handle bed files in batch
 def process_bed_file(bed_file, work_path, output_dir):
     # sort bed file
     subprocess.run(["bedtools", "sort", "-i", os.path.join(work_path, bed_file)])
