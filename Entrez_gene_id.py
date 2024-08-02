@@ -8,22 +8,21 @@ gene_id = "LOC6737448"
 
 def fetch_gene_info(gene_id):
     """
-    使用 Entrez 查找基因信息，并提取基因名称和物种信息。
+    Use Entrez to look up gene information and extract gene names and species information.
     
-    :param gene_id: 要查找的基因ID
+    :param gene_id: The gene ID to look up
     :return: None
     """
     # Search gene_ID with Entrez.esearch
     with Entrez.esearch(db="gene", term=gene_id, retmode="xml") as handle:
         record = Entrez.read(handle)
         
-        # 获取搜索结果中的 ID 列表（通常只有一个 ID，但也可能有多个）
         # Acquire the ID list from searching result (Usually only one ID, but may be more than one)
         gene_ids = record["IdList"]
         
         # If gene_ID was found, get gene information with Entrez.efetch.
         if gene_ids:
-            gene_id = gene_ids[0]  # 取第一个ID，如果有多个ID，你可能需要遍历它们
+            gene_id = gene_ids[0]  # Take the first ID, if there are multiple IDs, you may need to iterate through them
             with Entrez.efetch(db="gene", id=gene_id, rettype="xml", retmode="xml") as handle:
                 gene_record = Entrez.read(handle)
                 
